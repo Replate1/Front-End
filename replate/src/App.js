@@ -1,46 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
+import SignUpForm from './pages/SignUpForm';
+import SignInForm from './pages/SignInForm';
+
 import './App.css';
 
-function App() {
-  const [user, setUser] = useState({ username: "", password: "" });
+class App extends Component {
+  render() {
+    return (
+      <Router basename="/react-auth-ui/">
+        <div className="App">
+          <div className="App__Aside"></div>
+          <div className="App__Form">
+            <div className="PageSwitcher">
+                <NavLink to="/sign-in" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign In</NavLink>
+                <NavLink exact to="/" activeClassName="PageSwitcher__Item--Active" className="PageSwitcher__Item">Sign Up</NavLink>
+              </div>
 
-  const handleChange = event => {
-    setUser({ ...user, [event.target.name]: event.target.value });
-  };
+              <div className="FormTitle">
+                  <NavLink to="/sign-in" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign In</NavLink> or <NavLink exact to="/" activeClassName="FormTitle__Link--Active" className="FormTitle__Link">Sign Up</NavLink>
+              </div>
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    console.log(user.name);
-    console.log(user.password);
-  };
+              <Route exact path="/" component={SignUpForm}>
+              </Route>
+              <Route path="/sign-in" component={SignInForm}>
+              </Route>
+          </div>
 
-  return (
-    <div className="App">
-      {console.log(user)}
-      <form onSubmit={event => handleSubmit(event)}>
-        <label>
-          Username:
-          <input
-            type="text"
-            name="username"
-            value={user.username}
-            onChange={event => handleChange(event)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="text"
-            name="password"
-            value={user.password}
-            onChange={event => handleChange(event)}
-          />
-        </label>
-        <button>Submit!</button>
-      </form>
-    </div>
-  );
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
