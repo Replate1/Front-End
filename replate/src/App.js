@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { HashRouter as Router, Route, NavLink } from 'react-router-dom';
 import SignUpForm from './components/SignUpForm';
 import SignInForm from './components/SignInForm';
-
+import Dashboard from './components/Dashboard';
+import { PrivateRoute } from './components/PrivateRoute';
 import './App.css';
 
 class App extends Component {
@@ -25,6 +26,7 @@ class App extends Component {
               </Route>
               <Route path="/sign-in" component={SignInForm}>
               </Route>
+              <PrivateRoute exact path='/dashboard' component={Dashboard}/>
           </div>
 
         </div>
