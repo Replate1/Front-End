@@ -9,6 +9,8 @@ class SignUpForm extends Component {
             email: '',
             password: '',
             name: '',
+            username: '',
+            phone: '',
             hasAgreed: false
         };
 
@@ -54,31 +56,41 @@ class SignUpForm extends Component {
                 <input type="password" id="password" className="FormField__Input" placeholder="Enter your password" name="password" value={this.state.password} onChange={this.handleChange} />
               </div>
               <div className="FormField">
-                <label className="FormField__Label" htmlFor="email">Phone Number</label>
-                <input type="email" id="email" className="FormField__Input" placeholder="Enter your phone number" name="phone" value={this.state.phone} onChange={this.handleChange} />
+                <label className="FormField__Label" htmlFor="phone">Phone Number</label>
+                <input type="phone" id="phone" className="FormField__Input" placeholder="Enter your phone number" name="phone" value={this.state.phone} onChange={this.handleChange} />
               </div>
               <div className="FormField">
                 <label className="FormField__Label" htmlFor="address">Address</label>
-                <input type="email" id="email" className="FormField__Input" placeholder="Enter your address" name="address" value={this.state.address} onChange={this.handleChange} />
+                <input type="address" id="address" className="FormField__Input" placeholder="Enter your address" name="address" value={this.state.address} onChange={this.handleChange} />
               </div>
-              <div className="FormField">
-                <label className="FormField__CheckboxLabel" htmlFor="type">Please indicate whether you are a Business or Volunteer<br></br><br></br>
-                    <input className="FormField__Checkbox" type="checkbox" name="Business" value={this.state.business} onChange={this.handleChange} /> Business
-                </label>
-              </div>
-              <div className="FormField">
-                <label className="FormField__CheckboxLabel">
-                    <input className="FormField__Checkbox" type="checkbox" name="Volunteer" value={this.state.volunteer} onChange={this.handleChange} /> Volunteer
-                </label>
-              </div>
+
+            {/* Drop Down Box */}
+              <form onSubmit={this.handleSubmit}>
+              <label className="FormField__Label" > 
+                         Are you a Business or Volunteer?
+              <select value={this.state.value} onChange={this.handleChange}>
+              <option value="Business">Business</option>
+            <option value="Volunteer">Volunteer</option>
+            </select>
+            </label>
+            <br></br>
+            <br></br>
+            </form>  
+       {/* End of Drop Down Box  */}
+
               <div className="FormField">
                 <label className="FormField__CheckboxLabel">
                     <input className="FormField__Checkbox" type="checkbox" name="hasAgreed" value={this.state.hasAgreed} onChange={this.handleChange} /> I agree all statements in <a href="www.termsofservice.com" className="FormField__TermsLink">terms of service</a>
                 </label>
               </div>
+              <input type="submit" value="Submit" />
+              <br></br>
+              <br></br>
+
               <div className="FormField">
                   <button className="FormField__Button mr-20">Sign Up</button> <Link to="/sign-in" className="FormField__Link">I'm already member</Link>
               </div>
+
             </form>
           </div>
         );
