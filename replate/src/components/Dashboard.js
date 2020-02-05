@@ -1,71 +1,51 @@
-import React, { useContext, useState } from "react";
-import Account from "./components/Account";
-import Header from "./components/Header";
+import React, { useState, useParams } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-// import { ModelContext } from "../Context/ModelContext";
-// const Dashboard = () => {
-//   return (
-//   <div>
-//       <h1>Dashboard</h1>
-//   </div>
-  
-//   )
-// };
+//components
+import Header from "./components/Header";
+import BusinessPickups from "../components/BusinessPickups";
+import UserPickups from "../components/UserPickups";
+import Pickups from "../components/Pickup";
+
+//contexts
+import BusinessPickupContext from "../contexts/BusinessPickup";
+import UserPickupContext from "../contexts/UserPickup";
 
 initialState = {
   user_type: "",
   userId: "",
-  pickups: [
-
-  ]
-}
+  pickups: []
+};
 
 const Dashboard = props => {
-// const [names, setNames] = useState([
-//     {
-//       id: 0,
-//       name: "Deepu"
-//     },
-//     {
-//       id: 1,
-//       name: "Chintu"
-//     },
-//     {
-//       id: 2,
-//       name: "Chaman"
-//     }
-//   ]);
 
-//   const openModel = () => setCurrentModel({ name: "DashboardModal" });
+  const [loggedInUser, setLoggedInUser] = useState(initialState);
+  const [pickups, setPickups] = useState([]);
+  const { id } = useParams();
 
-//   const handleNameDelete = id =>
-//     setCurrentModel({
-//       name: "ConfirmModal",
-//       props: {
-//         title: "Confirm Delete",
-//         cb: () => {
-//           setNames(names.filter(n => n.id !== id));
-//           setCurrentModel(null);
-//         }
-//       }
-//     });
+  const getUserInfo = () => {
+    return localStorage.getItem("type", "userId");
+  };
+
+  const setUser = user => {
+    setLoggedInUser(
+      getUserInfo(),
+      [...loggedInUser, user]
+    );
+  };
+
+  const getPickups = pickup => {
+    setPickups;
+  };
 
   return (
     <div>
       <h1>Dashboard</h1>
-      {/* <button onClick={openModel}>Open Modal</button>
-      <hr />
-      {names.map(n => (
-        <p key={n.id}>
-          {n.name} - <span onClick={() => handleNameDelete(n.id)}>DELETE</span>
-        </p>
-      ))} */}
-      {/* {? user_type === '1'&& !isLoading &&  {
-      <UserPickups props={} />
-      }} : {<BusinessPickups props={}}
-      <button onClick={() => localStorage.getItem('token') set: null props.history.push('/login')}
-
-      <BusinessPickups props={} /> */}
+      {/* {user_type === '1' ? && (
+        <BusinessPickups props={loggedInUser} />
+      ) : (
+        <UserPickups props={loggedInUser} />
+      ) */}
     </div>
   );
 };
