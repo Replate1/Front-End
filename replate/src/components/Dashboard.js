@@ -14,7 +14,9 @@ import UserPickupContext from "../contexts/UserPickup";
 initialState = {
   user_type: "",
   userId: "",
-  pickups: []
+  pickups: [
+
+  ]
 };
 
 const Dashboard = props => {
@@ -31,16 +33,21 @@ const Dashboard = props => {
     setLoggedInUser(
       getUserInfo(),
       [...loggedInUser, user]
-    );
+    )
+    console.log(loggedInUser)
   };
 
   const getPickups = pickup => {
-    setPickups;
+    axiosWithAuth()
+    .get('')
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
   };
 
   return (
     <div>
       <h1>Dashboard</h1>
+      
       {/* {user_type === '1' ? && (
         <BusinessPickups props={loggedInUser} />
       ) : (
