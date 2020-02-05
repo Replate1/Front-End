@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
 class SignUpForm extends Component {
   constructor() {
     super();
-
     //The /register is expecting: 
     // username, 
     // password, 
@@ -13,44 +11,36 @@ class SignUpForm extends Component {
     // address, 
     // phone_number,
     // type
-
     this.state = {
       username: "",
       password: "",
       name: "",
       address: "",
       phone_number: "",
-      email: "",
-      type: null
+      type: ""
     };
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   handleChange(e) {
     let target = e.target;
-    let value = target.type === 'type' ? JSON.parseInt(target.value) : target.value;
+    let value = target.type === "checkbox" ? target.checked : target.value;
     let name = target.name;
-
     this.setState({
       [name]: value
     });
   }
-
   handleSubmit(e) {
     e.preventDefault();
     console.log("The form was submitted with the following data:");
     console.log(this.state);
     axios
-      .post("https://app-replate2.herokuapp.com/api/auth/register", this.state)
+      .post("https://app-replate2.herokuapp.com/api/auth/register")
       .then(res => {
         console.log(res);
-        this.props.history.push('/login');
       })
       .catch(err => console.log(err));
   }
-
   render() {
     return (
       <div className="FormCenter">
@@ -125,73 +115,18 @@ class SignUpForm extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="FormField">
-            <label className="FormField__Label" htmlFor="email">
-             Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="FormField__Input"
-              placeholder="Email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
           {/* Drop Down Box */}
           <label className="FormField__Label">
             Are you a Business or Volunteer?
-            <select name="type" type="type" onChange={this.handleChange}>
-              <option value={null} default>Select...</option>
+            <select value={this.state.type} onChange={this.handleChange}>
               <option value="1">Business</option>
-            <option value="2">Volunteer</option>
+              <option value="2">Volunteer</option>
             </select>
           </label>
           <br></br>
           <br></br>
-          {/* End of Drop Down Box  */}
-          {/* <div className="FormField">
-            <label className="FormField__Label" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="FormField__Input"
-              placeholder="Email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
+        
           <div className="FormField">
-            <label className="FormField__CheckboxLabel" htmlFor="type">
-              Please indicate whether you are a Business or Volunteer<br></br>
-              <br></br>
-              <input
-                className="FormField__Checkbox"
-                type="checkbox"
-                name="user_type"
-                value={this.state.user_type}
-                onChange={this.handleChange}
-              />{" "}
-              Business
-            </label>
-          </div>
-          <div className="FormField">
-            <label className="FormField__CheckboxLabel">
-              <input
-                className="FormField__Checkbox"
-                type="checkbox"
-                name="user_type"
-                value={this.state.user_type}
-                onChange={this.handleChange}
-              />{" "}
-              Volunteer
-            </label>
-          </div> */}
-          {/* <div className="FormField">
             <label className="FormField__CheckboxLabel">
               <input
                 className="FormField__Checkbox"
@@ -205,7 +140,7 @@ class SignUpForm extends Component {
                 terms of service
               </a>
             </label>
-          </div> */}
+          </div>
           <div className="FormField">
             <button className="FormField__Button mr-20">Sign Up</button>{" "}
             <Link to="/sign-in" className="FormField__Link">
@@ -217,5 +152,4 @@ class SignUpForm extends Component {
     );
   }
 }
-
 export default SignUpForm;
