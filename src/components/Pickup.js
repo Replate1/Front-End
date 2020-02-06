@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export const Pickup = props => {
@@ -12,6 +12,7 @@ export const Pickup = props => {
     business_id,
     volunteer_id
   } = props.pickup;
+  console.log(typeof(id));
   const [editing, setEditing] = useState(false);
   const [input, setInput] = useState(
     id,
@@ -22,11 +23,35 @@ export const Pickup = props => {
     business_id,
     volunteer_id
   );
+  const [currentPickup, setCurrentPickup] = useState({});
   const user = localStorage.getItem("type");
   const userNum = parseInt(user);
   const idString = JSON.stringify(id);
   const volId = localStorage.getItem("userId")
   const volIdInt = parseInt(volId);
+  console.log(typeof(idString));
+  console.log(typeof("volIdInt : " , volIdInt));
+  console.log("Input from Pickup.js: " , input)
+  // console.log("Pickup from Pickup.js: " , pickup)
+
+  useEffect(() => {
+    axiosWithAuth()
+    .get(`/api/pickups/${idString}`)
+    .then(res => {
+      console.log(res)
+      const { id, food_type, amount, pickup_time, complete, business_id } = res.data
+      setCurrentPickup({
+        id,
+        food_type,
+        amount,
+        pickup_time,
+        completed,
+        business_id,
+        volunteer_id: volIdInt
+      })
+    })
+    .catch(err => console.log(err))
+  }, [])
 
   const editPickupHandler = () => {
     setEditing(!editing);
@@ -65,7 +90,7 @@ export const Pickup = props => {
   const acceptPickupHandler = e => {
     e.preventDefault();
     axiosWithAuth()
-    .put(`/api/pickups/${id}`, volIdInt)
+    .put(`/api/pickups/${idString}`, currentPickup)
     .then(res => {
       console.log(res)
       window.location.reload();
@@ -129,13 +154,11 @@ export const Pickup = props => {
       {userNum === 1 ? (
         <button onClick={editPickupHandler}>Edit Pickup</button>
       ) : (
-        <button onClick={acceptPickupHandler}>Accept Pickup</button>
+       userNum === 2 && volunteer_id === volIdInt ? <div><button>Unaccept Pickup</button> <button onClick={completePickupHandler}>Complete Pickup</button></div> : <button onClick={acceptPickupHandler}>Accept Pickup</button>
       )}
       {userNum === 1 ? (
         <button onClick={deletePickupHandler}>Delete Pickup</button>
       ) : null}
-      {userNum === 2 && volunteer_id ? <button>Unaccept Pickup</button> : null}
-      {userNum === 2 && volunteer_id ? <button onClick={completePickupHandler}>Complete Pickup</button> : null}
     </div>
   );
 };
