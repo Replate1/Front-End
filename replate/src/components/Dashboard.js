@@ -18,15 +18,15 @@ const Dashboard = props => {
 const [names, setNames] = useState([
     {
       id: 0,
-      name: "Deepu"
+      name: "Applebees"
     },
     {
       id: 1,
-      name: "Chintu"
+      name: "Outback Steakhouse"
     },
     {
       id: 2,
-      name: "Chaman"
+      name: "Red Lobster"
     }
   ]);
 
