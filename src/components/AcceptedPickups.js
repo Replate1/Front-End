@@ -15,14 +15,14 @@ const AcceptedPickups = props => {
         axiosWithAuth()
         .get(`/api/pickups/volunteer/${volString}`)
         .then(res => {
-            console.log(res)
+            // console.log(res)
             setAcceptedPickups(res.data)
-            console.log(typeof(acceptedPickups));
+            // console.log(typeof(acceptedPickups));
         })
         .catch(err => console.log(err))
     }, [])
 
-    console.log("Pickups from AcceptedPickups.js: " , acceptedPickups)
+    // console.log("Pickups from AcceptedPickups.js: " , acceptedPickups)
 
     return( 
         <div className="accepted-pickups">

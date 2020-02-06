@@ -17,8 +17,8 @@ const Dashboard = props => {
   const id = localStorage.getItem("userId"); 
   // console.log(typeof(id)); 
   const [pickups, setPickups] = useState([]);
-  console.log("Dashboard.js Pickups: " , typeof(pickups));
-  console.log(pickups);
+  // console.log("Dashboard.js Pickups: " , typeof(pickups));
+  // console.log(pickups);
 
   const updatePickup = updatedPickup => {
     setPickups({

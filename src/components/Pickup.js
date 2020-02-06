@@ -2,7 +2,6 @@ import React, { useContext, useState, useEffect } from "react";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 export const Pickup = props => {
-
   const {
     id,
     food_type,
@@ -12,7 +11,7 @@ export const Pickup = props => {
     business_id,
     volunteer_id
   } = props.pickup;
-  console.log(typeof(id));
+  // console.log(typeof id);
   const [editing, setEditing] = useState(false);
   const [input, setInput] = useState(
     id,
@@ -27,31 +26,38 @@ export const Pickup = props => {
   const user = localStorage.getItem("type");
   const userNum = parseInt(user);
   const idString = JSON.stringify(id);
-  const volId = localStorage.getItem("userId")
+  const volId = localStorage.getItem("userId");
   const volIdInt = parseInt(volId);
-  console.log(typeof(idString));
-  console.log(typeof("volIdInt : " , volIdInt));
-  console.log("Input from Pickup.js: " , input)
+  // console.log(typeof idString);
+  // console.log(typeof ("volIdInt : ", volIdInt));
+  // console.log("Input from Pickup.js: ", input);
   // console.log("Pickup from Pickup.js: " , pickup)
 
   useEffect(() => {
     axiosWithAuth()
-    .get(`/api/pickups/${idString}`)
-    .then(res => {
-      console.log(res)
-      const { id, food_type, amount, pickup_time, complete, business_id } = res.data
-      setCurrentPickup({
-        id,
-        food_type,
-        amount,
-        pickup_time,
-        completed,
-        business_id,
-        volunteer_id: volIdInt
+      .get(`/api/pickups/${idString}`)
+      .then(res => {
+        console.log(res);
+        const {
+          id,
+          food_type,
+          amount,
+          pickup_time,
+          complete,
+          business_id
+        } = res.data;
+        setCurrentPickup({
+          id,
+          food_type,
+          amount,
+          pickup_time,
+          completed,
+          business_id,
+          volunteer_id: volIdInt
+        });
       })
-    })
-    .catch(err => console.log(err))
-  }, [])
+      .catch(err => console.log(err));
+  }, [setCurrentPickup]);
 
   const editPickupHandler = () => {
     setEditing(!editing);
@@ -90,13 +96,28 @@ export const Pickup = props => {
   const acceptPickupHandler = e => {
     e.preventDefault();
     axiosWithAuth()
-    .put(`/api/pickups/${idString}`, currentPickup)
-    .then(res => {
-      console.log(res)
-      window.location.reload();
-    })
-    .catch(err => console.log(err))
-  }
+      .put(`/api/pickups/${idString}`, currentPickup)
+      .then(res => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
+  };
+
+  const unacceptPickupHandler = e => {
+    e.preventDefault();
+    setCurrentPickup({
+      ...currentPickup,
+      volunteer_id: null
+    });
+    axiosWithAuth()
+      .put(`/api/pickups/${idString}`, currentPickup)
+      .then(res => {
+        console.log(res);
+        // window.location.reload();
+      })
+      .catch(err => console.log(err));
+  };
 
   const completePickupHandler = props => {
     axiosWithAuth()
@@ -153,8 +174,13 @@ export const Pickup = props => {
       <p className="pickup-time">Pickup Time: {props.pickup.pickup_time}</p>
       {userNum === 1 ? (
         <button onClick={editPickupHandler}>Edit Pickup</button>
+      ) : userNum === 2 && volunteer_id === volIdInt ? (
+        <div>
+          <button onClick={unacceptPickupHandler}>Unaccept Pickup</button>{" "}
+          <button onClick={completePickupHandler}>Complete Pickup</button>
+        </div>
       ) : (
-       userNum === 2 && volunteer_id === volIdInt ? <div><button>Unaccept Pickup</button> <button onClick={completePickupHandler}>Complete Pickup</button></div> : <button onClick={acceptPickupHandler}>Accept Pickup</button>
+        <button onClick={acceptPickupHandler}>Accept Pickup</button>
       )}
       {userNum === 1 ? (
         <button onClick={deletePickupHandler}>Delete Pickup</button>
