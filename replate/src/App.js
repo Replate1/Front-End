@@ -64,7 +64,7 @@ const App = props => {
             <Route exact path="/" component={SignUpForm}></Route>
             <Route path="/sign-in" component={SignInForm}></Route>
             <PrivateRoute exact path="/dashboard" component={Dashboard}/>
-            <PrivateRoute exact path="add-pickup" component={AddPickup} />
+            <PrivateRoute exact path="/add-pickup" component={AddPickup} />
           </div>
         </div>
       </Router>
