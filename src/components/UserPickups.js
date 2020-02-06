@@ -7,9 +7,6 @@ import UserPickupContext from '../contexts/UserPickup';
 const UserPickups = props => {
 
     const { pickups, id } = useContext(UserPickupContext)
-    // console.log("This is from UserPickups " , props)
-    console.log(typeof(pickups));
-    console.log(pickups);
 
     return (
         <div className="volunteer-pickups">
