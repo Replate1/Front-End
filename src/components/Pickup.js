@@ -23,6 +23,7 @@ export const Pickup = props => {
     volunteer_id
   );
   const [currentPickup, setCurrentPickup] = useState({});
+  const [unacceptedPickup, setUnacceptedPickup] = useState({});
   const user = localStorage.getItem("type");
   const userNum = parseInt(user);
   const idString = JSON.stringify(id);
@@ -54,6 +55,15 @@ export const Pickup = props => {
           completed,
           business_id,
           volunteer_id: volIdInt
+        });
+        setUnacceptedPickup({
+          id,
+          food_type,
+          amount,
+          pickup_time,
+          completed,
+          business_id,
+          volunteer_id: null
         });
       })
       .catch(err => console.log(err));
@@ -106,22 +116,17 @@ export const Pickup = props => {
 
   const unacceptPickupHandler = e => {
     e.preventDefault();
-    setCurrentPickup({
-      ...currentPickup,
-      volunteer_id: null
-    });
     axiosWithAuth()
-      .put(`/api/pickups/${idString}`, currentPickup)
+      .put(`/api/pickups/${idString}`, unacceptedPickup)
       .then(res => {
         console.log(res);
-        // window.location.reload();
+        window.location.reload();
       })
       .catch(err => console.log(err));
   };
 
   const completePickupHandler = props => {
     axiosWithAuth()
-      // instead of using delete can use .put to set completed to true
       .delete(`/api/pickups/${idString}`)
       .then(res => {
         console.log(res);

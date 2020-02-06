@@ -6,16 +6,16 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 // import Header from "./components/Header";
 import BusinessPickups from "../components/BusinessPickups";
 import UserPickups from "../components/UserPickups";
-import AcceptedPickups from './AcceptedPickups';
+import AcceptedPickups from "./AcceptedPickups";
 
 //contexts
 import BusinessPickupContext from "../contexts/BusinessPickup";
 import UserPickupContext from "../contexts/UserPickup";
 
 const Dashboard = props => {
-  const type= localStorage.getItem("type");
-  const id = localStorage.getItem("userId"); 
-  // console.log(typeof(id)); 
+  const type = localStorage.getItem("type");
+  const id = localStorage.getItem("userId");
+  // console.log(typeof(id));
   const [pickups, setPickups] = useState([]);
   // console.log("Dashboard.js Pickups: " , typeof(pickups));
   // console.log(pickups);
@@ -23,16 +23,16 @@ const Dashboard = props => {
   const updatePickup = updatedPickup => {
     setPickups({
       ...pickups.map(pickup => {
-        if(pickups.id === updatedPickup.id) {
+        if (pickups.id === updatedPickup.id) {
           // console.log("UpdatedPickup: ", updatedPickup)
-          return updatedPickup
+          return updatedPickup;
         } else {
           // console.log("pickup: ", pickup)
           return pickup;
         }
       })
-    })
-  }
+    });
+  };
 
   useEffect(() => {
     if (type === "1") {
@@ -54,22 +54,28 @@ const Dashboard = props => {
     }
   }, []);
 
+  const signOut = e => {
+    e.preventDefault();
+    localStorage.clear();
+    props.history.push("/sign-in");
+  };
+
   return (
     <div>
       <h1>Dashboard</h1>
-      {(type === '1') ? (
-        <BusinessPickupContext.Provider value={{type, id, pickups}}>
-        <BusinessPickups {...props} updatePickup={updatePickup}/>
+      {type === "1" ? (
+        <BusinessPickupContext.Provider value={{ type, id, pickups }}>
+          <BusinessPickups {...props} updatePickup={updatePickup} />
         </BusinessPickupContext.Provider>
       ) : (
-        <UserPickupContext.Provider value={{type, id, pickups}}>
-        <h1>Available Pickups</h1>
-        <UserPickups {...props}/>
-        <h1>Accepted Pickups</h1>
-        <AcceptedPickups />
+        <UserPickupContext.Provider value={{ type, id, pickups }}>
+          <h1>Available Pickups</h1>
+          <UserPickups {...props} />
+          <h1>Accepted Pickups</h1>
+          <AcceptedPickups />
         </UserPickupContext.Provider>
-        
       )}
+      <button onClick={signOut}>Sign Out</button>
     </div>
   );
 };
