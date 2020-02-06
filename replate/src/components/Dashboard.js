@@ -1,59 +1,72 @@
-import React, { useContext, useState } from "react";
-import { ModelContext } from "../Context/ModelContext";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-// const Dashboard = () => {
-//   return (
-//   <div>
-//       <h1>Dashboard</h1>
-//   </div>
-  
-//   )
-// };
+//components
+// import Header from "./components/Header";
+import BusinessPickups from "../components/BusinessPickups";
+import UserPickups from "../components/UserPickups";
 
-// export default Dashboard;
-
-// Dashboard code start
+//contexts
+import BusinessPickupContext from "../contexts/BusinessPickup";
+import UserPickupContext from "../contexts/UserPickup";
 
 const Dashboard = props => {
-const [names, setNames] = useState([
-    {
-      id: 0,
-      name: "Deepu"
-    },
-    {
-      id: 1,
-      name: "Chintu"
-    },
-    {
-      id: 2,
-      name: "Chaman"
-    }
-  ]);
+  const type= localStorage.getItem("type");
+  const id = localStorage.getItem("userId"); 
+  // console.log(typeof(id)); 
+  const [pickups, setPickups] = useState([]);
+  console.log("Dashboard.js Pickups: " , typeof(pickups));
+  console.log(pickups);
 
-  const openModel = () => setCurrentModel({ name: "DashboardModal" });
-
-  const handleNameDelete = id =>
-    setCurrentModel({
-      name: "ConfirmModal",
-      props: {
-        title: "Confirm Delete",
-        cb: () => {
-          setNames(names.filter(n => n.id !== id));
-          setCurrentModel(null);
+  const updatePickup = updatedPickup => {
+    setPickups({
+      ...pickups.map(pickup => {
+        if(pickups.id === updatedPickup.id) {
+          console.log("UpdatedPickup: ", updatedPickup)
+          return updatedPickup
+        } else {
+          console.log("pickup: ", pickup)
+          return pickup;
         }
-      }
-    });
+      })
+    })
+  }
+
+  useEffect(() => {
+    if (type === "1") {
+      axiosWithAuth()
+        .get(`/api/pickups/business/${id}`)
+        .then(res => {
+          // console.log("This is from the .then ", res)
+          setPickups(res.data);
+        })
+        .catch(err => console.log(err));
+    } else {
+      axiosWithAuth()
+        .get(`/api/pickups/volunteer/${id}`)
+        .then(res => {
+          // console.log("This is from the .then ", res)
+          setPickups(res.data);
+        })
+        .catch(err => console.log(err));
+    }
+  }, []);
 
   return (
     <div>
-      <p>Dashboard</p>
-      <button onClick={openModel}>Open Modal</button>
-      <hr />
-      {names.map(n => (
-        <p key={n.id}>
-          {n.name} - <span onClick={() => handleNameDelete(n.id)}>DELETE</span>
-        </p>
-      ))}
+      <h1>Dashboard</h1>
+      {(type === '1') ? (
+        <BusinessPickupContext.Provider value={{type, id, pickups}}>
+        <BusinessPickups {...props} updatePickup={updatePickup}/>
+        <h1>BusinessPickups</h1>
+        </BusinessPickupContext.Provider>
+      ) : (
+        <UserPickupContext.Provider value={{type, id, pickups}}>
+        <UserPickups {...props}/>
+        <h1>VolunteerPickups</h1>
+        </UserPickupContext.Provider>
+      )}
     </div>
   );
 };
