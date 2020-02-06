@@ -10,6 +10,10 @@ const BusinessPickups = props => {
     const addPickupHandler = () => {
         props.history.push('/add-pickup')
     }
+
+    const changePickupHandler = () => {
+        props.history.push('/change-pickup')
+    }
     
     const { pickups, id } = useContext(BusinessPickupContext)
     // console.log("This is from BusinessPickups " , props)
@@ -21,8 +25,10 @@ const BusinessPickups = props => {
                 <Pickup
                     key={pickup.id}
                     pickup={pickup}
+                    
                 />
             ))}
+            <button onClick={changePickupHandler}>Change Pickup</button>
         </div>
     );
 }

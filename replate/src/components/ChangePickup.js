@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import BusinessPickupContext from "../contexts/BusinessPickup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
-const AddPickup = props => {
+const ChangePickup = props => {
 
   const id = localStorage.getItem('userId');
   const idNum = parseInt(id);
@@ -85,4 +85,4 @@ const AddPickup = props => {
   );
 };
 
-export default AddPickup;
+export default ChangePickup;

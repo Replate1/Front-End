@@ -6,6 +6,7 @@ import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
 import Dashboard from "./components/Dashboard";
 import AddPickup from "./components/AddPickup";
+import ChangePickup from "./components/ChangePickup";
 
 //PrivateRoute
 import { PrivateRoute } from "./components/PrivateRoute";
@@ -65,6 +66,7 @@ const App = props => {
             <Route path="/sign-in" component={SignInForm}></Route>
             <PrivateRoute exact path="/dashboard" component={Dashboard}/>
             <PrivateRoute exact path="/add-pickup" component={AddPickup} />
+            <PrivateRoute exact path="/change-pickup" component={ChangePickup} />
           </div>
         </div>
       </Router>
