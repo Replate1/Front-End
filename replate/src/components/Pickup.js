@@ -25,6 +25,10 @@ export const Pickup = props => {
   const user = localStorage.getItem("type");
   const userNum = parseInt(user);
   const idString = JSON.stringify(id);
+  const volId = localStorage.getItem("userId")
+  const volIdInt = parseInt(volId);
+  console.log(typeof(volIdInt));
+  console.log(volIdInt);
 
   const editPickupHandler = () => {
     setEditing(!editing);
@@ -51,6 +55,27 @@ export const Pickup = props => {
   };
 
   const deletePickupHandler = props => {
+    axiosWithAuth()
+      .delete(`/api/pickups/${idString}`)
+      .then(res => {
+        console.log(res);
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
+  };
+
+  const acceptPickupHandler = e => {
+    e.preventDefault();
+    axiosWithAuth()
+    .put(`/api/pickups/${id}`, volIdInt)
+    .then(res => {
+      console.log(res)
+      window.location.reload();
+    })
+    .catch(err => console.log(err))
+  }
+
+  const completePickupHandler = props => {
     axiosWithAuth()
       .delete(`/api/pickups/${idString}`)
       .then(res => {
@@ -105,13 +130,13 @@ export const Pickup = props => {
       {userNum === 1 ? (
         <button onClick={editPickupHandler}>Edit Pickup</button>
       ) : (
-        <button>Accept Pickup</button>
+        <button onClick={acceptPickupHandler}>Accept Pickup</button>
       )}
       {userNum === 1 ? (
         <button onClick={deletePickupHandler}>Delete Pickup</button>
       ) : null}
       {userNum === 2 && volunteer_id ? <button>Unaccept Pickup</button> : null}
-      {userNum === 2 && volunteer_id ? <button>Complete Pickup</button> : null}
+      {userNum === 2 && volunteer_id ? <button onClick={completePickupHandler}>Complete Pickup</button> : null}
     </div>
   );
 };
