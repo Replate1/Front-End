@@ -27,8 +27,6 @@ export const Pickup = props => {
   const idString = JSON.stringify(id);
   const volId = localStorage.getItem("userId")
   const volIdInt = parseInt(volId);
-  console.log(typeof(volIdInt));
-  console.log(volIdInt);
 
   const editPickupHandler = () => {
     setEditing(!editing);
@@ -77,6 +75,7 @@ export const Pickup = props => {
 
   const completePickupHandler = props => {
     axiosWithAuth()
+      // instead of using delete can use .put to set completed to true
       .delete(`/api/pickups/${idString}`)
       .then(res => {
         console.log(res);
