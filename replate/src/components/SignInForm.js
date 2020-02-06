@@ -11,7 +11,7 @@ class SignInForm extends Component {
       username: "",
       password: ""
     };
-
+    console.log(this.props);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -36,6 +36,7 @@ class SignInForm extends Component {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('userId', res.data.id);
         localStorage.setItem('type', res.data.type);
+        console.log(this.props);
         this.props.history.push('./dashboard')
       })
       .catch(err => console.log(err));

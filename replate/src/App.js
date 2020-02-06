@@ -1,36 +1,23 @@
 import React, { Component } from "react";
 import { HashRouter as Router, Route, NavLink, BrowserRouter, Switch } from "react-router-dom";
+
+//components
 import SignUpForm from "./components/SignUpForm";
 import SignInForm from "./components/SignInForm";
 import Dashboard from "./components/Dashboard";
+import AddPickup from "./components/AddPickup";
+import ChangePickup from "./components/ChangePickup";
+
+//PrivateRoute
 import { PrivateRoute } from "./components/PrivateRoute";
-import Account from "./components/Account";
-import Header from "./components/Header";
+
+
+
 import "./App.css";
 
 
-class App extends Component {
-  render() {
+const App = props => { 
     return (
-
-      // Dashboard Start
-    //   <ModelContextProvider>
-    //     <ModalManager />
-    //     <div className="App">
-    //       <BrowserRouter>
-    //         <Header />
-    //         <Switch>
-    //           <Route exact component={Dashboard} path="/" />
-    //           <Route exact component={Account} path="/account" />
-    //           <Route exact component={Contacts} path="/contacts" />
-    //         </Switch>
-    //       </BrowserRouter>
-    //     </div>
-    //   </ModelContextProvider>
-    // );
-   // Dashboard End
-   
-    
       <Router basename="/react-auth-ui/">
         <div className="App">
           <div className="App__Aside"></div>
@@ -74,12 +61,13 @@ class App extends Component {
 
             <Route exact path="/" component={SignUpForm}></Route>
             <Route path="/sign-in" component={SignInForm}></Route>
-            <PrivateRoute exact path="/dashboard" component={Dashboard} />
+            <PrivateRoute exact path="/dashboard" component={Dashboard}/>
+            <PrivateRoute exact path="/add-pickup" component={AddPickup} />
+            <PrivateRoute exact path="/change-pickup" component={ChangePickup} />
           </div>
         </div>
       </Router>
     );
-  }
 }
 
 export default App;
