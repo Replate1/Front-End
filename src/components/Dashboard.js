@@ -23,10 +23,10 @@ const Dashboard = props => {
     setPickups({
       ...pickups.map(pickup => {
         if(pickups.id === updatedPickup.id) {
-          console.log("UpdatedPickup: ", updatedPickup)
+          // console.log("UpdatedPickup: ", updatedPickup)
           return updatedPickup
         } else {
-          console.log("pickup: ", pickup)
+          // console.log("pickup: ", pickup)
           return pickup;
         }
       })
@@ -44,7 +44,7 @@ const Dashboard = props => {
         .catch(err => console.log(err));
     } else {
       axiosWithAuth()
-        .get(`/api/pickups/volunteer/${id}`)
+        .get(`/api/pickups/open-requests`)
         .then(res => {
           // console.log("This is from the .then ", res)
           setPickups(res.data);
@@ -59,12 +59,10 @@ const Dashboard = props => {
       {(type === '1') ? (
         <BusinessPickupContext.Provider value={{type, id, pickups}}>
         <BusinessPickups {...props} updatePickup={updatePickup}/>
-        <h1>BusinessPickups</h1>
         </BusinessPickupContext.Provider>
       ) : (
         <UserPickupContext.Provider value={{type, id, pickups}}>
         <UserPickups {...props}/>
-        <h1>VolunteerPickups</h1>
         </UserPickupContext.Provider>
       )}
     </div>
