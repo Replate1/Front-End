@@ -1,3 +1,5 @@
 import { createContext } from 'react';
 
-export const BusinessPickupContext = createContext();
+const BusinessPickupContext = createContext();
+
+export default BusinessPickupContext;

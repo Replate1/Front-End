@@ -1,3 +1,5 @@
 import { createContext } from 'react';
 
-export const UserPickupContext = createContext();
+const UserPickupContext = createContext();
+
+export default UserPickupContext;

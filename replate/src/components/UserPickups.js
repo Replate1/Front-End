@@ -2,19 +2,21 @@ import React, { useContext } from 'react';
 import Pickup from './Pickup';
 import UserPickupContext from '../contexts/UserPickup';
 
-const UserPickups = () => {
-    const { pickups, addPickup, completePickup } = useContext(BusinessPickupContext)
+
+
+const UserPickups = props => {
+
+    const { pickups, id } = useContext(UserPickupContext)
+    // console.log("This is from UserPickups " , props)
 
     return (
-        <div className="user-pickups">
-            {pickups.map(pickup => {
+        <div className="volunteer-pickups">
+            {pickups.map(pickup => (
                 <Pickup
                     key={pickup.id}
                     pickup={pickup}
-                    addPickup= {addPickup}
-                    completePickup= {completePickup}
                 />
-            })}
+            ))}
         </div>
     );
 }
