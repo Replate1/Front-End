@@ -6,6 +6,7 @@ import { axiosWithAuth } from "../utils/axiosWithAuth";
 // import Header from "./components/Header";
 import BusinessPickups from "../components/BusinessPickups";
 import UserPickups from "../components/UserPickups";
+import AcceptedPickups from './AcceptedPickups';
 
 //contexts
 import BusinessPickupContext from "../contexts/BusinessPickup";
@@ -62,8 +63,12 @@ const Dashboard = props => {
         </BusinessPickupContext.Provider>
       ) : (
         <UserPickupContext.Provider value={{type, id, pickups}}>
+        <h1>Available Pickups</h1>
         <UserPickups {...props}/>
+        <h1>Accepted Pickups</h1>
+        <AcceptedPickups />
         </UserPickupContext.Provider>
+        
       )}
     </div>
   );
