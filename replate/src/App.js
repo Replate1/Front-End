@@ -16,10 +16,7 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import "./App.css";
 
 
-const App = props => {
-
-  console.log("this is from app.js ", props);
- 
+const App = props => { 
     return (
       <Router basename="/react-auth-ui/">
         <div className="App">

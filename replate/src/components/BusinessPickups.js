@@ -6,29 +6,29 @@ import AddPickup from "./AddPickup";
 
 
 const BusinessPickups = props => {
+    // console.log("Business props: " , props);
+
+    
 
     const addPickupHandler = () => {
         props.history.push('/add-pickup')
     }
-
-    const changePickupHandler = () => {
-        props.history.push('/change-pickup')
-    }
     
     const { pickups, id } = useContext(BusinessPickupContext)
-    // console.log("This is from BusinessPickups " , props)
+    console.log("BusinessPickups.js Pickups " , typeof(pickups));
+    console.log(pickups);
+
+
     return (
         <div className="business-pickups">
             <button onClick={addPickupHandler}>Add Pickup</button>
-            {/* <AddPickup props={id} /> */}
-            {pickups.map(pickup => (
+            {Array.from(pickups).map(pickup => (
                 <Pickup
                     key={pickup.id}
                     pickup={pickup}
-                    
+                    updatePickup={props.updatePickup}
                 />
             ))}
-            <button onClick={changePickupHandler}>Change Pickup</button>
         </div>
     );
 }

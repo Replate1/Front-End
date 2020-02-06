@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import BusinessPickupContext from "../contexts/BusinessPickup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
@@ -6,9 +6,12 @@ const ChangePickup = props => {
 
   const id = localStorage.getItem('userId');
   const idNum = parseInt(id);
-  console.log(idNum);
+ 
+  
+  const [pickupId, setPickupId] = useState();
 
   const [pickup, setPickup] = useState({
+    id: "",
     food_type: "",
     amount: "",
     pickup_time: "",
@@ -16,17 +19,29 @@ const ChangePickup = props => {
     business_id: idNum
   });
 
+  useEffect(()=> {
+      axiosWithAuth()
+      .get(`/api/pickups/business/${idNum}`)
+      .then(res => {
+          console.log(res)
+        //   setPickup(res.data)
+        //   console.log(pickup)
+          setPickupId(res.data.id)
+          console.log("Pickup ID ", pickupId);
+        })
+      .catch(err => console.log(err))
+  }, [])
+
   const handleSubmit = e => {
-      e.preventDefault();
+    e.preventDefault();
     axiosWithAuth()
-    .post('/api/pickups/', pickup)
+    .put(`/api/pickups/${pickupId}`, pickup)
     .then(res => console.log(res))
     .catch(err => console.log(err))
     props.history.push('/dashboard')
   };
 
   const handleChange = e => {
-    //   e.persist();
     setPickup({
         ...pickup,
         [e.target.name]: e.target.value
@@ -35,12 +50,9 @@ const ChangePickup = props => {
 
   return (
     <div>
-      AddPickup
+      Edit Pickup
       <form className="FormFields">
         <div className="FormField">
-          <label className="FormField__Label" htmlFor="food_type">
-            Food Type
-          </label>
           <input
             type="text"
             id="food_type"
@@ -52,9 +64,6 @@ const ChangePickup = props => {
           />
         </div>
         <div className="FormField">
-          <label className="FormField__Label" htmlFor="amount">
-            Amount
-          </label>
           <input
             type="number"
             id="amount"
@@ -66,9 +75,6 @@ const ChangePickup = props => {
           />
         </div>
         <div className="FormField">
-          <label className="FormField__Label" htmlFor="pickup_time">
-            Pickup Time
-          </label>
           <input
             type="number"
             id="pickup_time"

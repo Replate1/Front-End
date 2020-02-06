@@ -12,10 +12,26 @@ import BusinessPickupContext from "../contexts/BusinessPickup";
 import UserPickupContext from "../contexts/UserPickup";
 
 const Dashboard = props => {
-  console.log("This is from the dashboard " , props);
   const type= localStorage.getItem("type");
-  const id = localStorage.getItem("userId");  
+  const id = localStorage.getItem("userId"); 
+  // console.log(typeof(id)); 
   const [pickups, setPickups] = useState([]);
+  console.log("Dashboard.js Pickups: " , typeof(pickups));
+  console.log(pickups);
+
+  const updatePickup = updatedPickup => {
+    setPickups({
+      ...pickups.map(pickup => {
+        if(pickups.id === updatedPickup.id) {
+          console.log("UpdatedPickup: ", updatedPickup)
+          return updatedPickup
+        } else {
+          console.log("pickup: ", pickup)
+          return pickup;
+        }
+      })
+    })
+  }
 
   useEffect(() => {
     if (type === "1") {
@@ -42,7 +58,7 @@ const Dashboard = props => {
       <h1>Dashboard</h1>
       {(type === '1') ? (
         <BusinessPickupContext.Provider value={{type, id, pickups}}>
-        <BusinessPickups {...props}/>
+        <BusinessPickups {...props} updatePickup={updatePickup}/>
         <h1>BusinessPickups</h1>
         </BusinessPickupContext.Provider>
       ) : (

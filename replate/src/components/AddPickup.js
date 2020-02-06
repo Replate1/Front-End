@@ -17,16 +17,17 @@ const AddPickup = props => {
   });
 
   const handleSubmit = e => {
-      e.preventDefault();
+    e.preventDefault();
     axiosWithAuth()
     .post('/api/pickups/', pickup)
-    .then(res => console.log(res))
+    .then(res => {
+        console.log(res)
+        props.history.push('/dashboard')
+    })
     .catch(err => console.log(err))
-    props.history.push('/dashboard')
   };
 
   const handleChange = e => {
-    //   e.persist();
     setPickup({
         ...pickup,
         [e.target.name]: e.target.value
@@ -36,11 +37,8 @@ const AddPickup = props => {
   return (
     <div>
       AddPickup
-      <form className="FormFields">
+      <form className="FormFields" onSubmit={handleSubmit}>
         <div className="FormField">
-          <label className="FormField__Label" htmlFor="food_type">
-            Food Type
-          </label>
           <input
             type="text"
             id="food_type"
@@ -52,9 +50,6 @@ const AddPickup = props => {
           />
         </div>
         <div className="FormField">
-          <label className="FormField__Label" htmlFor="amount">
-            Amount
-          </label>
           <input
             type="number"
             id="amount"
@@ -66,9 +61,6 @@ const AddPickup = props => {
           />
         </div>
         <div className="FormField">
-          <label className="FormField__Label" htmlFor="pickup_time">
-            Pickup Time
-          </label>
           <input
             type="number"
             id="pickup_time"
@@ -79,7 +71,10 @@ const AddPickup = props => {
             onChange={handleChange}
           />
         </div>
-        <button onClick={handleSubmit} >Submit</button>
+        {/* <div>
+            <input type="submit">Submit</input>
+        </div> */}
+        <button>Submit</button>
       </form>
     </div>
   );
