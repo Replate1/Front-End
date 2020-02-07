@@ -77,7 +77,7 @@ const AddPickup = props => {
         {/* <div>
             <input type="submit">Submit</input>
         </div> */}
-        <button className="button">Submit</button>
+        <button className="btn">Submit</button>
       </form>
     </div>
     </Page>

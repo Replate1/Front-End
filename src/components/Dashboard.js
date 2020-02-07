@@ -77,7 +77,7 @@ const Dashboard = props => {
           <AcceptedPickups />
         </UserPickupContext.Provider>
       )}
-      <button className="button" onClick={signOut}>Sign Out</button>
+      <button className="btn" onClick={signOut}>Sign Out</button>
     </div>
     </Page>
   );

@@ -176,7 +176,7 @@ class SignUpForm extends Component {
           <br></br>
           {/* End of Drop Down Box  */}
 
-          <button class="button">Submit</button>
+          <button class="btn">Submit</button>
 
 <br></br>
 <br></br>
