@@ -81,6 +81,7 @@ export const Pickup = props => {
       .put(`/api/pickups/${idString}`, input)
       .then(res => {
         console.log(res);
+        props.updatePickup({})
       })
       .catch(err => console.log(err));
     window.location.reload();
@@ -185,10 +186,7 @@ export const Pickup = props => {
         </button>
       ) : userNum === 2 && volunteer_id === volIdInt ? (
         <div>
-          <button className="button" onClick={unacceptPickupHandler}>
-            {" "}
-            Unaccept Pickup
-          </button>{" "}
+          <button className="button" onClick={unacceptPickupHandler}>Unaccept Pickup</button>
           <button className="button" onClick={completePickupHandler}>
             Complete Pickup
           </button>
