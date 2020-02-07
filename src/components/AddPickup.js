@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import BusinessPickupContext from "../contexts/BusinessPickup";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import Page from "./Page";
+import "../App.css";
 
 const AddPickup = props => {
 
@@ -35,8 +37,9 @@ const AddPickup = props => {
 }
 
   return (
+    <Page>
     <div>
-      AddPickup
+      <h1 className="business-pickups">Add Pickup</h1>
       <form className="FormFields" onSubmit={handleSubmit}>
         <div className="FormField">
           <input
@@ -74,9 +77,10 @@ const AddPickup = props => {
         {/* <div>
             <input type="submit">Submit</input>
         </div> */}
-        <button>Submit</button>
+        <button className="button">Submit</button>
       </form>
     </div>
+    </Page>
   );
 };
 

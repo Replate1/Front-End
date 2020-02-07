@@ -7,11 +7,10 @@ import SignInForm from "./components/SignInForm";
 import Dashboard from "./components/Dashboard";
 import AddPickup from "./components/AddPickup";
 import ChangePickup from "./components/ChangePickup";
+import Page from "./components/Page";
 
 //PrivateRoute
 import { PrivateRoute } from "./components/PrivateRoute";
-
-
 
 import "./App.css";
 
@@ -19,10 +18,10 @@ import "./App.css";
 const App = props => { 
     return (
       <Router basename="/react-auth-ui/">
-        <div className="App">
-          <div className="App__Aside"></div>
-          <div className="App__Form">
-            <div className="PageSwitcher">
+        {/* <div className="App"> */}
+          {/* <div className="App__Aside"></div> */}
+          {/* <div className="App__Form"> */}
+            {/* <div className="PageSwitcher">
               <NavLink
                 to="/sign-in"
                 activeClassName="PageSwitcher__Item--Active"
@@ -38,9 +37,9 @@ const App = props => {
               >
                 Sign Up
               </NavLink>
-            </div>
+            </div> */}
 
-            <div className="FormTitle">
+            {/* <div className="FormTitle">
               <NavLink
                 to="/sign-in"
                 activeClassName="FormTitle__Link--Active"
@@ -57,15 +56,15 @@ const App = props => {
               >
                 Sign Up
               </NavLink>
-            </div>
+            </div> */}
 
             <Route exact path="/" component={SignUpForm}></Route>
             <Route path="/sign-in" component={SignInForm}></Route>
             <PrivateRoute exact path="/dashboard" component={Dashboard}/>
             <PrivateRoute exact path="/add-pickup" component={AddPickup} />
             <PrivateRoute exact path="/change-pickup" component={ChangePickup} />
-          </div>
-        </div>
+          {/* </div> */}
+        {/* </div> */}
       </Router>
     );
 }

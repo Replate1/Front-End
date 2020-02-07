@@ -15,7 +15,7 @@ const BusinessPickups = props => {
 
     return (
         <div className="business-pickups">
-            <button onClick={addPickupHandler}>Add Pickup</button>
+            <button className="button" onClick={addPickupHandler}>Add Pickup</button>
             {Array.from(pickups).map(pickup => (
                 <Pickup
                     key={pickup.id}
