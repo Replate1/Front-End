@@ -38,7 +38,7 @@ class SignInForm extends Component {
         localStorage.setItem('userId', res.data.id);
         localStorage.setItem('type', res.data.type);
         console.log(this.props);
-        this.props.history.push('./dashboard')
+        this.props.history.push('/dashboard')
       })
       .catch(err => console.log(err));
   }

@@ -48,7 +48,7 @@ class SignUpForm extends Component {
       .post("https://app-replate2.herokuapp.com/api/auth/register", this.state)
       .then(res => {
         console.log(res);
-        this.props.history.push('/login');
+        this.props.history.push('/sign-in');
       })
       .catch(err => console.log(err));
   }
