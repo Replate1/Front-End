@@ -144,7 +144,7 @@ export const Pickup = props => {
           onChange={handleChange}
         />
       </div>
-      <button onClick={handleUpdate}>Submit</button>
+      <button className="button" onClick={handleUpdate}>Submit</button>
     </form>
   ) : (
     <div className="pickup">
@@ -152,12 +152,12 @@ export const Pickup = props => {
       <p className="pickup-amount">Amount: {props.pickup.amount}</p>
       <p className="pickup-time">Pickup Time: {props.pickup.pickup_time}</p>
       {userNum === 1 ? (
-        <button onClick={editPickupHandler}>Edit Pickup</button>
+        <button className="button" onClick={editPickupHandler}>Edit Pickup</button>
       ) : (
-       userNum === 2 && volunteer_id === volIdInt ? <div><button>Unaccept Pickup</button> <button onClick={completePickupHandler}>Complete Pickup</button></div> : <button onClick={acceptPickupHandler}>Accept Pickup</button>
+       userNum === 2 && volunteer_id === volIdInt ? <div><button className="button"> Unaccept Pickup</button> <button className="button" onClick={completePickupHandler}>Complete Pickup</button></div> : <button className="button" onClick={acceptPickupHandler}>Accept Pickup</button>
       )}
       {userNum === 1 ? (
-        <button onClick={deletePickupHandler}>Delete Pickup</button>
+        <button className="button" onClick={deletePickupHandler}>Delete Pickup</button>
       ) : null}
     </div>
   );
