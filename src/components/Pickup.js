@@ -81,6 +81,7 @@ export const Pickup = props => {
       .put(`/api/pickups/${idString}`, input)
       .then(res => {
         console.log(res);
+        props.updatePickup({})
       })
       .catch(err => console.log(err));
     window.location.reload();
