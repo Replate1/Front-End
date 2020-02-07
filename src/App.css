@@ -149,7 +149,7 @@
   color: #706c61;
 }
 
-.button {
+.btn {
   background-color: #2E4158;
   border-radius: 20px;
   color:black;
@@ -165,7 +165,7 @@
   
 }
 
-.button:hover {
+.btn:hover {
   opacity: 1;
   color:#e1f4f3;
 }

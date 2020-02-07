@@ -96,7 +96,7 @@ class SignInForm extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <button className="button">Submit</button>
+          <button className="btn">Submit</button>
 <br></br>
 <br></br>
 <br></br>
