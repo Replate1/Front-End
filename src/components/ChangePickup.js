@@ -85,7 +85,7 @@ const ChangePickup = props => {
             onChange={handleChange}
           />
         </div>
-        <button onClick={handleSubmit} >Submit</button>
+        <button className="button"> onClick={handleSubmit} >Submit</button>
       </form>
     </div>
   );

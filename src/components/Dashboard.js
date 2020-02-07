@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
 
 //components
 // import Header from "./components/Header";
 import BusinessPickups from "../components/BusinessPickups";
 import UserPickups from "../components/UserPickups";
-import AcceptedPickups from "./AcceptedPickups";
+import AcceptedPickups from './AcceptedPickups';
+import Page from './Page';
+
 
 //contexts
 import BusinessPickupContext from "../contexts/BusinessPickup";
@@ -61,7 +62,8 @@ const Dashboard = props => {
   };
 
   return (
-    <div>
+    <Page>
+    <div class="dashboard_header">
       <h1>Dashboard</h1>
       {type === "1" ? (
         <BusinessPickupContext.Provider value={{ type, id, pickups }}>
@@ -75,8 +77,9 @@ const Dashboard = props => {
           <AcceptedPickups />
         </UserPickupContext.Provider>
       )}
-      <button onClick={signOut}>Sign Out</button>
+      <button className="button" onClick={signOut}>Sign Out</button>
     </div>
+    </Page>
   );
 };
 

@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
+import Page from './Page';
+
 
 class SignUpForm extends Component {
   constructor() {
@@ -53,6 +55,27 @@ class SignUpForm extends Component {
 
   render() {
     return (
+      <>
+      <Page>
+      <div className="FormTitle">
+      <NavLink
+        to="/sign-in"
+        activeClassName="FormTitle__Link--Active"
+        className="FormTitle__Link"
+      >
+        Sign In
+      </NavLink>{" "}
+      or{" "}
+      <NavLink
+        exact
+        to="/"
+        activeClassName="FormTitle__Link--Active"
+        className="FormTitle__Link"
+      >
+        Sign Up
+      </NavLink>
+    </div>
+
       <div className="FormCenter">
         <form onSubmit={this.handleSubmit} className="FormFields">
           <div className="FormField">
@@ -139,6 +162,7 @@ class SignUpForm extends Component {
               onChange={this.handleChange}
             />
           </div>
+
           {/* Drop Down Box */}
           <label className="FormField__Label">
             Are you a Business or Volunteer?
@@ -151,61 +175,16 @@ class SignUpForm extends Component {
           <br></br>
           <br></br>
           {/* End of Drop Down Box  */}
-          {/* <div className="FormField">
-            <label className="FormField__Label" htmlFor="email">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              className="FormField__Input"
-              placeholder="Email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="FormField">
-            <label className="FormField__CheckboxLabel" htmlFor="type">
-              Please indicate whether you are a Business or Volunteer<br></br>
-              <br></br>
-              <input
-                className="FormField__Checkbox"
-                type="checkbox"
-                name="user_type"
-                value={this.state.user_type}
-                onChange={this.handleChange}
-              />{" "}
-              Business
-            </label>
-          </div>
-          <div className="FormField">
-            <label className="FormField__CheckboxLabel">
-              <input
-                className="FormField__Checkbox"
-                type="checkbox"
-                name="user_type"
-                value={this.state.user_type}
-                onChange={this.handleChange}
-              />{" "}
-              Volunteer
-            </label>
-          </div> */}
-          {/* <div className="FormField">
-            <label className="FormField__CheckboxLabel">
-              <input
-                className="FormField__Checkbox"
-                type="checkbox"
-                name="hasAgreed"
-                value={this.state.hasAgreed}
-                onChange={this.handleChange}
-              />{" "}
-              I agree all statements in{" "}
-              <a href="www.termsofservice.com" className="FormField__TermsLink">
-                terms of service
-              </a>
-            </label>
-          </div> */}
+
+          <button class="button">Submit</button>
+
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
+          
           <div className="FormField">
             <button className="FormField__Button mr-20">Sign Up</button>{" "}
             <Link to="/sign-in" className="FormField__Link">
@@ -214,6 +193,9 @@ class SignUpForm extends Component {
           </div>
         </form>
       </div>
+      </Page>
+      </>
+
     );
   }
 }

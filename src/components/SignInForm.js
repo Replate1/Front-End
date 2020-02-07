@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import axios from 'axios';
+import Page from './Page';
 
 class SignInForm extends Component {
   constructor() {
@@ -44,6 +45,26 @@ class SignInForm extends Component {
 
   render() {
     return (
+      <>
+      <Page>
+      <div className="FormTitle">
+      <NavLink
+        to="/sign-in"
+        activeClassName="FormTitle__Link--Active"
+        className="FormTitle__Link"
+      >
+        Sign In
+      </NavLink>{" "}
+      or{" "}
+      <NavLink
+        exact
+        to="/"
+        activeClassName="FormTitle__Link--Active"
+        className="FormTitle__Link"
+      >
+        Sign Up
+      </NavLink>
+    </div>
       <div className="FormCenter">
         <form onSubmit={this.handleSubmit} className="FormFields">
           <div className="FormField">
@@ -75,6 +96,11 @@ class SignInForm extends Component {
               onChange={this.handleChange}
             />
           </div>
+          <button className="button">Submit</button>
+<br></br>
+<br></br>
+<br></br>
+<br></br>
 
           <div className="FormField">
             <button className="FormField__Button mr-20">Sign In</button>{" "}
@@ -84,7 +110,9 @@ class SignInForm extends Component {
           </div>
         </form>
       </div>
-    );
+      </Page>
+      </>
+      );
   }
 }
 
