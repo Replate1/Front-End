@@ -186,10 +186,7 @@ export const Pickup = props => {
         </button>
       ) : userNum === 2 && volunteer_id === volIdInt ? (
         <div>
-          <button className="button" onClick={unacceptPickupHandler}>
-            {" "}
-            Unaccept Pickup
-          </button>{" "}
+          <button className="button" onClick={unacceptPickupHandler}>Unaccept Pickup</button>
           <button className="button" onClick={completePickupHandler}>
             Complete Pickup
           </button>
