@@ -81,10 +81,10 @@ export const Pickup = props => {
       .put(`/api/pickups/${idString}`, input)
       .then(res => {
         console.log(res);
-        props.updatePickup({})
+        // props.updatePickup({})
+        window.location.reload();
       })
       .catch(err => console.log(err));
-    window.location.reload();
   };
 
   const handleChange = e => {
